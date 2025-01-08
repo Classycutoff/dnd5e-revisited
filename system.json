@@ -8,7 +8,7 @@
     "verified": "13.333"
   },
   "url": "https://github.com/Classycutoff/dnd5e-revisited",
-  "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
+  "manifest": "https://raw.githubusercontent.com/Classycutoff/dnd5e-revisited/master/system.json",
   "download": "https://github.com/Classycutoff/dnd5e-revisited/releases/download/v1.0.0/dnd5e-revisited-v1.0.0.zip",
   "authors": [
     {
