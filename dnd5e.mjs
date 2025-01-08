@@ -11,6 +11,9 @@
 // Import Configuration
 import DND5E from "./module/config.mjs";
 import { registerSystemKeybindings, registerSystemSettings, registerDeferredSettings } from "./module/settings.mjs";
+import { HouseRules } from "./module/house-rules.mjs";
+import { ResurrectionChallengeDialog } from "./module/applications/resurrection-challenge-dialog.js";
+import { applyClassFeatureChanges } from "./module/class-feature-changes.js";
 
 // Import Submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -485,6 +488,208 @@ Hooks.once("ready", function() {
     }
   });
 
+  // Implement house rules
+  Hooks.on("dnd5e.preRollAction", (actor, action, options) => {
+    // Modify action economy
+    if (action.type === "action") {
+      options.actionEconomy = HouseRules.actionEconomy;
+    }
+  });
+
+  Hooks.on("dnd5e.getMovementSpeed", (actor, movement) => {
+    // Modify dash and movement rules
+    if (movement.action === "dash") {
+      movement.value = actor.system.attributes.movement.walk;
+      movement.description = HouseRules.dash.description;
+    }
+  });
+
+  // Override the default movement description
+  CONFIG.DND5E.movementTypes.walk = HouseRules.movement.description;
+
+  // Initialize new attributes for characters
+  Hooks.on("createActor", (actor) => {
+    if (actor.type === "character") {
+      actor.update({
+        "system.attributes.dying": 0,
+        "system.attributes.resurrections": 0
+      });
+    }
+  });
+
+  // Implement new death saving throw rules
+  Hooks.on("dnd5e.rollDeathSave", (actor, roll, options) => {
+    const result = roll.total;
+    if (result === 1) {
+      actor.update({"system.attributes.death.failure": actor.system.attributes.death.failure + 2});
+    } else if (result === 20) {
+      actor.update({
+        "system.attributes.hp.value": 1,
+        "system.attributes.dying": actor.system.attributes.dying + 1
+      });
+    } else if (result >= 10) {
+      actor.update({"system.attributes.death.success": actor.system.attributes.death.success + 1});
+    } else {
+      actor.update({"system.attributes.death.failure": actor.system.attributes.death.failure + 1});
+    }
+
+    if (actor.system.attributes.death.success >= 3) {
+      actor.update({
+        "system.attributes.death.success": 0,
+        "system.attributes.death.failure": 0,
+        "system.attributes.dying": actor.system.attributes.dying + 1
+      });
+    } else if (actor.system.attributes.death.failure >= 3) {
+      // Handle character death
+    }
+  });
+
+  // Implement resurrection tracking and challenge
+  Hooks.on("dnd5e.preResurrection", (actor, options) => {
+    const resurrectionCount = actor.system.attributes.resurrections || 0;
+    options.difficultyClass = HouseRules.resurrection.baseDC + (resurrectionCount * HouseRules.resurrection.dcIncreasePerResurrection);
+    
+    // Check if the spell used is in the rapidResurrection list
+    if (HouseRules.resurrection.rapidResurrection.spells.includes(options.spell.name)) {
+      const dc = HouseRules.resurrection.rapidResurrection.dc + (resurrectionCount * HouseRules.resurrection.rapidResurrection.dcIncreasePerResurrection);
+      const roll = new Roll("1d20").roll();
+      if (roll.total >= dc) {
+        actor.update({"system.attributes.resurrections": resurrectionCount + 1});
+        return true;
+      } else {
+        ui.notifications.warn(`Rapid resurrection failed. Future resurrection DCs increased by 1.`);
+        actor.update({"system.attributes.resurrections": resurrectionCount + 1});
+        return false;
+      }
+    }
+    
+    // For non-rapid resurrection spells, open the Resurrection Challenge dialog
+    new ResurrectionChallengeDialog(actor).render(true);
+    return false; // Prevent the default resurrection behavior
+  });
+
+  // Import the ResurrectionChallengeDialog
+
+  // Implement Bonus Action change
+  Hooks.on("dnd5e.preItemUse", (item, config, options) => {
+    if (config.actionType === "bonus") {
+      const exceptions = ["Cunning Action", "Patient Defense", "Step of the Wind"];
+      if (!exceptions.includes(item.name)) {
+        config.actionType = "action";
+        ui.notifications.info(`${item.name} now uses a regular action instead of a bonus action.`);
+      }
+    }
+  });
+
+  // Apply class feature changes
+  Hooks.once("ready", () => {
+    applyClassFeatureChanges();
+  });
+
+  // Implement new hit point calculation
+  Hooks.on("dnd5e.preUpdateActor", (actor, updateData, options, userId) => {
+    if (actor.type === "character" && updateData.system?.details?.level) {
+      const hpPerLevel = actor.system.attributes.hd + actor.system.abilities.con.mod;
+      const newLevel = updateData.system.details.level;
+      const levelDifference = newLevel - actor.system.details.level;
+      const hpIncrease = (actor.system.attributes.hd + Math.floor(Math.random() * actor.system.attributes.hd) + 1 + actor.system.abilities.con.mod) * levelDifference;
+      
+      updateData.system.attributes.hp = {
+        value: actor.system.attributes.hp.value + hpIncrease,
+        max: actor.system.attributes.hp.max + hpIncrease
+      };
+    }
+  });
+
+  // Implement multihit penalty
+  Hooks.on("dnd5e.preRollAttack", (item, rollConfig) => {
+    const actor = item.actor;
+    if (!actor.flags.dnd5e) actor.flags.dnd5e = {};
+    if (!actor.flags.dnd5e.attackCount) actor.flags.dnd5e.attackCount = 0;
+    
+    actor.flags.dnd5e.attackCount++;
+    const penalty = -2 * (actor.flags.dnd5e.attackCount - 1);
+    
+    rollConfig.parts.push(penalty);
+    rollConfig.data.multiAttackPenalty = penalty;
+    
+    // Reset attack count at the end of the turn
+    if (game.combat) {
+      Hooks.once("updateCombat", (combat, turnData) => {
+        if (combat.current.combatantId === actor.combatant?.id) {
+          actor.flags.dnd5e.attackCount = 0;
+        }
+      });
+    }
+  });
+
+  // Implement crit success/failure
+  Hooks.on("dnd5e.rollAttack", (item, roll) => {
+    const d20 = roll.dice[0];
+    if (d20.total === 20) {
+      roll.criticalSuccess = true;
+      roll.isCritical = true;
+    } else if (d20.total === 1) {
+      roll.criticalFailure = true;
+    }
+  });
+
+  Hooks.on("dnd5e.rollAbility", (ability, roll) => {
+    const d20 = roll.dice[0];
+    if (d20.total === 20) {
+      roll.criticalSuccess = true;
+    } else if (d20.total === 1) {
+      roll.criticalFailure = true;
+    }
+  });
+
+  Hooks.on("dnd5e.rollSkill", (skill, roll) => {
+    const d20 = roll.dice[0];
+    if (d20.total === 20) {
+      roll.criticalSuccess = true;
+    } else if (d20.total === 1) {
+      roll.criticalFailure = true;
+    }
+  });
+
+  Hooks.on("dnd5e.rollSave", (ability, roll) => {
+    const d20 = roll.dice[0];
+    if (d20.total === 20) {
+      roll.criticalSuccess = true;
+    } else if (d20.total === 1) {
+      roll.criticalFailure = true;
+    }
+  });
+});
+
+  // Implement death saving throw rules
+  Hooks.on("dnd5e.preRollDeathSave", (actor, roll, options) => {
+    options.description = HouseRules.deathSavingThrows.description;
+    options.applyDyingCondition = HouseRules.deathSavingThrows.applyDyingCondition;
+  });
+
+  // Implement resurrection rules
+  Hooks.on("dnd5e.preResurrection", (actor, options, user) => {
+    const resurrectionRules = HouseRules.resurrection;
+    options.description = resurrectionRules.description;
+    options.contributionChecks = resurrectionRules.contributionChecks;
+    options.baseDC = resurrectionRules.baseDC;
+    options.dcIncreasePerResurrection = resurrectionRules.dcIncreasePerResurrection;
+    options.dcDecreasePerSuccess = resurrectionRules.dcDecreasePerSuccess;
+    options.dcIncreasePerFailure = resurrectionRules.dcIncreasePerFailure;
+    options.bypassSpells = resurrectionRules.bypassSpells;
+    options.rapidResurrection = resurrectionRules.rapidResurrection;
+  });
+
+  // Override the default resurrection method
+  CONFIG.DND5E.resurrectActor = async function(actor, options) {
+    const resurrectionRules = HouseRules.resurrection;
+    // Implement the new resurrection challenge logic here
+    // This is a placeholder and would need to be expanded based on the specific requirements
+    console.log("Implementing custom resurrection rules");
+    // ... (add detailed implementation)
+  };
+
   // Register items by type
   dnd5e.registry.classes.initialize();
 
@@ -511,7 +716,6 @@ Hooks.once("ready", function() {
     ui.notifications.error("MIGRATION.5eVersionTooOldWarning", {localize: true, permanent: true});
   }
   migrations.migrateWorld();
-});
 
 /* -------------------------------------------- */
 /*  System Styling                              */

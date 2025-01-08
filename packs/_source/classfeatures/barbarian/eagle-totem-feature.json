@@ -1,0 +1,87 @@
+{
+  "_id": "EagleTotemFeature",
+  "name": "Eagle Totem",
+  "type": "feat",
+  "img": "icons/creatures/birds/eagle-golden-white.webp",
+  "system": {
+    "description": {
+      "value": "<p>While you're raging, you can take the Dash action as a free action on each of your turns.</p>"
+    },
+    "source": {
+      "custom": "Homebrew",
+      "book": "Player's Handbook",
+      "page": "",
+      "license": "OGL"
+    },
+    "identifier": "eagle-totem",
+    "activation": {
+      "type": "special",
+      "cost": 0,
+      "condition": ""
+    },
+    "duration": {
+      "value": null,
+      "units": ""
+    },
+    "target": {
+      "value": null,
+      "width": null,
+      "units": "",
+      "type": "self"
+    },
+    "range": {
+      "value": null,
+      "long": null,
+      "units": "self"
+    },
+    "uses": {
+      "value": null,
+      "max": "",
+      "per": null,
+      "recovery": ""
+    },
+    "consume": {
+      "type": "",
+      "target": null,
+      "amount": null
+    },
+    "ability": null,
+    "actionType": null,
+    "attackBonus": null,
+    "chatFlavor": "",
+    "critical": {
+      "threshold": null,
+      "damage": ""
+    },
+    "damage": {
+      "parts": [],
+      "versatile": ""
+    },
+    "formula": "",
+    "save": {
+      "ability": "",
+      "dc": null,
+      "scaling": "spell"
+    },
+    "requirements": "Barbarian (Path of the Totem Warrior)",
+    "recharge": {
+      "value": null,
+      "charged": false
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.5",
+    "coreVersion": "10.291",
+    "createdTime": 1684887352101,
+    "modifiedTime": 1684887352101,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

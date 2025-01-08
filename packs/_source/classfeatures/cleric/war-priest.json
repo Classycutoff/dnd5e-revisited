@@ -1,0 +1,38 @@
+{
+  "_id": "WarPriestFeature",
+  "name": "War Priest",
+  "type": "feat",
+  "img": "icons/skills/melee/hand-grip-sword-white-red.webp",
+  "system": {
+    "description": {
+      "value": "<p>From 1st level, your god delivers bolts of inspiration to you while you are engaged in battle. When you use the Attack action, you can make one weapon attack as a free action.</p><p>You can use this feature a number of times equal to your Wisdom modifier (a minimum of once). You regain all expended uses when you finish a long rest.</p>"
+    },
+    "source": {
+      "custom": "Homebrew",
+      "book": "Player's Handbook",
+      "page": "",
+      "license": "OGL"
+    },
+    "identifier": "war-priest",
+    "requirements": "Cleric (War Domain)",
+    "type": {
+      "value": "class",
+      "subtype": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.5",
+    "coreVersion": "10.291",
+    "createdTime": 1684887352101,
+    "modifiedTime": 1684887352101,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

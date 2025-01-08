@@ -1,0 +1,38 @@
+{
+  "_id": "DhU2dWCNnX78TstR",
+  "name": "Vanish",
+  "type": "feat",
+  "img": "icons/skills/movement/silhouette-running-gray.webp",
+  "system": {
+    "description": {
+      "value": "<p>Starting at 14th level, you can use the Hide action as a free action on your turn. Also, you can't be tracked by nonmagical means, unless you choose to leave a trail.</p>"
+    },
+    "source": {
+      "custom": "Homebrew",
+      "book": "Player's Handbook",
+      "page": "",
+      "license": "OGL"
+    },
+    "identifier": "vanish",
+    "requirements": "Ranger 14",
+    "type": {
+      "value": "class",
+      "subtype": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.5",
+    "coreVersion": "10.291",
+    "createdTime": 1684887352101,
+    "modifiedTime": 1684887352101,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

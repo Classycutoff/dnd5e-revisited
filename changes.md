@@ -1,0 +1,12 @@
+Bonus action changes
+Barbarian Eagle (Dash as a bonus action , change to free action)
+Bard Battle magic (one weapon attack as a bonus action, change to free action)
+Cleric War Priest (One weapon attack as a bonus action, change to free action)
+Druid Combat Wild Shape (Turn to wild shape as a bonus action, change to free action)
+Fighter Eldritch Knight War Magic (Whan casting a cantrip, you can make one weapon attack as a bonus action, change to free action)
+Fighter Eldritch Knight Improved War Magic (When casting a spell, you can make one weapon attack as a bonus action, change to free action)
+Paladin Oath of the Ancients Elder Champion (When casting a spell of 1 action it becomes a bonus action, change to free action and can be only used once per turn.)
+Ranger Vanish (Hide action as a bonus action, change to free action)
+Rogue Cunning Action (Takes a bonus action, change to free action)
+Rogue Thief Fast Hands (Takes a bonus action, change to free action)
+Sorcerer Metamagic Quickened (Takes a bonus action, change to free action once per turn)

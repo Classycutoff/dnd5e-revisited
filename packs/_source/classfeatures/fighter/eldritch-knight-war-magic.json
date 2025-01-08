@@ -1,0 +1,38 @@
+{
+  "_id": "EldritchKnightWarMagicFeature",
+  "name": "War Magic",
+  "type": "feat",
+  "img": "icons/magic/symbols/chevron-circle-trio-red.webp",
+  "system": {
+    "description": {
+      "value": "<p>Beginning at 7th level, when you use your action to cast a cantrip, you can make one weapon attack as a free action.</p>"
+    },
+    "source": {
+      "custom": "Homebrew",
+      "book": "Player's Handbook",
+      "page": "",
+      "license": "OGL"
+    },
+    "identifier": "eldritch-knight-war-magic",
+    "requirements": "Fighter (Eldritch Knight) 7",
+    "type": {
+      "value": "class",
+      "subtype": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.5",
+    "coreVersion": "10.291",
+    "createdTime": 1684887352101,
+    "modifiedTime": 1684887352101,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

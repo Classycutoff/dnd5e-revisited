@@ -21,6 +21,54 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "eldritch_knight_war_magic_feature",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.EldritchKnightWarMagicFeature",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "spell": {
+            "ability": [],
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 7,
+        "title": "War Magic (Eldritch Knight)"
+      },
+      {
+        "_id": "eldritch_knight_improved_war_magic_feature",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.EldritchKnightImprovedWarMagicFeature",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "spell": {
+            "ability": [],
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 18,
+        "title": "Improved War Magic (Eldritch Knight)"
+      },
+      {
         "type": "HitPoints",
         "configuration": {},
         "value": {},

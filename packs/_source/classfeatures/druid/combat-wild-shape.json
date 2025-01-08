@@ -1,0 +1,38 @@
+{
+  "_id": "CombatWildShapeFeature",
+  "name": "Combat Wild Shape",
+  "type": "feat",
+  "img": "icons/creatures/abilities/wolf-howl-moon-blue.webp",
+  "system": {
+    "description": {
+      "value": "<p>At 2nd level, you gain the ability to use Wild Shape as a free action.</p><p>Additionally, while you are transformed by Wild Shape, you can use a free action to expend one spell slot to regain 1d8 hit points per level of the spell slot expended.</p>"
+    },
+    "source": {
+      "custom": "Homebrew",
+      "book": "Player's Handbook",
+      "page": "",
+      "license": "OGL"
+    },
+    "identifier": "combat-wild-shape",
+    "requirements": "Druid (Circle of the Moon)",
+    "type": {
+      "value": "class",
+      "subtype": ""
+    }
+  },
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "flags": {},
+  "_stats": {
+    "systemId": "dnd5e",
+    "systemVersion": "2.1.5",
+    "coreVersion": "10.291",
+    "createdTime": 1684887352101,
+    "modifiedTime": 1684887352101,
+    "lastModifiedBy": "dnd5ebuilder0000"
+  }
+}

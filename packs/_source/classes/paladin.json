@@ -21,6 +21,30 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "oath_of_the_ancients_elder_champion_feature",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.OathOfTheAncientsElderChampionFeature",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "spell": {
+            "ability": [],
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 20,
+        "title": "Elder Champion (Oath of the Ancients)"
+      },
+      {
         "type": "HitPoints",
         "configuration": {},
         "value": {},

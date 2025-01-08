@@ -21,6 +21,30 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "combat_wild_shape_feature",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.CombatWildShapeFeature",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "spell": {
+            "ability": [],
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 2,
+        "title": "Combat Wild Shape (Circle of the Moon)"
+      },
+      {
         "type": "HitPoints",
         "configuration": {},
         "value": {},

@@ -246,6 +246,18 @@
                             <input type="text" name="system.attributes.death.failure" value="{{system.attributes.death.failure}}" placeholder="0" data-dtype="Number">
                         </div>
                     </div>
+                    <div class="counter flexrow dying-condition">
+                        <h4>{{ localize "DND5E.DyingCondition" }}</h4>
+                        <div class="counter-value">
+                            <input type="text" name="system.attributes.dying" value="{{system.attributes.dying}}" placeholder="0" data-dtype="Number">
+                        </div>
+                    </div>
+                    <div class="counter flexrow resurrections">
+                        <h4>{{ localize "DND5E.Resurrections" }}</h4>
+                        <div class="counter-value">
+                            <input type="text" name="system.attributes.resurrections" value="{{system.attributes.resurrections}}" placeholder="0" data-dtype="Number">
+                        </div>
+                    </div>
                     {{#if config.conditionTypes.exhaustion}}
                     <div class="counter flexrow exhaustion">
                         <h4>{{ localize "DND5E.Exhaustion" }}</h4>

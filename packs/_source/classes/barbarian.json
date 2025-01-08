@@ -21,6 +21,30 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "eagle_totem_feature",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.EagleTotemFeature",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "spell": {
+            "ability": [],
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 3,
+        "title": "Eagle Totem Feature"
+      },
+      {
         "_id": "5jn0ekktgccyvvpw",
         "type": "HitPoints",
         "configuration": {},

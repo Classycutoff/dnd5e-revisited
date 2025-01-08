@@ -21,6 +21,30 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "battle_magic_feature",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.BattleMagicFeature",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "spell": {
+            "ability": [],
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 14,
+        "title": "Battle Magic"
+      },
+      {
         "type": "HitPoints",
         "configuration": {},
         "value": {},

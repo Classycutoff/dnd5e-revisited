@@ -21,6 +21,30 @@
     "hitDiceUsed": 0,
     "advancement": [
       {
+        "_id": "war_priest_feature",
+        "type": "ItemGrant",
+        "configuration": {
+          "items": [
+            {
+              "uuid": "Compendium.dnd5e.classfeatures.WarPriestFeature",
+              "optional": false
+            }
+          ],
+          "optional": false,
+          "spell": {
+            "ability": [],
+            "preparation": "",
+            "uses": {
+              "max": "",
+              "per": ""
+            }
+          }
+        },
+        "value": {},
+        "level": 1,
+        "title": "War Priest (War Domain)"
+      },
+      {
         "type": "HitPoints",
         "configuration": {},
         "value": {},
